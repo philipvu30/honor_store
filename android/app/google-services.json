@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "826971945904",
+    "firebase_url": "https://honor-47471.firebaseio.com",
+    "project_id": "honor-47471",
+    "storage_bucket": "honor-47471.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826971945904:android:79b5eea8bb47ba2f8a3475",
+        "android_client_info": {
+          "package_name": "com.honorhealthcare.honor_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826971945904-5tstlrv2624g9ud9knklcu6cqcekh568.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGvB9E6Da7g6DjcMDlZu7jJHpRJ4-nOSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826971945904-5tstlrv2624g9ud9knklcu6cqcekh568.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

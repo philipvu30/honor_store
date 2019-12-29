@@ -147,15 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             InkWell(
                               onTap: () {
-                                var user = authService.login(
-                                    email: email, pw: password);
-                                if (user != null) {
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomeScreen()),
-                                      (e) => false);
-                                }
+                                authService.login(email: email, pw: password);
                               },
                               child: Container(
                                 width: 350.0,
@@ -225,11 +217,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: <Widget>[
                                 IconButton(
                                   icon: Icon(FontAwesomeIcons.facebookSquare),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    authService.loginWithFacebook();
+                                  },
                                 ),
                                 IconButton(
                                   icon: Icon(FontAwesomeIcons.googlePlusSquare),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    authService.loginWithGoogle();
+                                  },
                                 ),
                               ],
                             ),

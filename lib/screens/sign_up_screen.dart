@@ -145,15 +145,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             InkWell(
                               onTap: () {
-                                var user = authService.signUp(
+                                authService.signUp(
                                     email: email, pw: password, name: name);
-                                if (user != null) {
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomeScreen()),
-                                      (e) => false);
-                                }
                               },
                               child: Container(
                                 width: 350.0,

@@ -11,26 +11,23 @@ class AuthWidget extends StatefulWidget {
 
 class _AuthWidgetState extends State<AuthWidget> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final authService =
         Provider.of<FirebaseAuthenticationService>(context, listen: false);
 
     return StreamBuilder(
-        stream: authService.onAuthStateChanged,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            if (snapshot.hasData) {
-              return HomeScreen();
-            }
-            return LoginScreen();
+      stream: authService.onAuthStateChanged,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          if (snapshot.hasData) {
+            return HomeScreen();
           }
-          return Center(child: CircularProgressIndicator());
-        });
+          return LoginScreen();
+        }
+        return Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(child: CircularProgressIndicator()));
+      },
+    );
   }
 }

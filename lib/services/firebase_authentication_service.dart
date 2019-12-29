@@ -1,37 +1,56 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:honor_store/model/user.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthenticationService {
   final _firebaseAuth = FirebaseAuth.instance;
 
-  User currentUser(FirebaseUser user) {
-    return user == null ? null : User(id: user.uid);
-  }
-
-  Future<FirebaseUser> signUp({String email, String pw, String name}) async {
+  Future<bool> signUp({String email, String pw, String name}) async {
     AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: pw);
-    FirebaseUser user = result.user;
-    return user;
+    return result.user != null;
   }
 
-  Future<FirebaseUser> login({String email, String pw}) async {
+  Future<bool> login({String email, String pw}) async {
     AuthResult result = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: pw);
-    FirebaseUser user = result.user;
-    return user;
+    return result.user != null;
   }
 
-  Stream<User> get onAuthStateChanged {
-    return _firebaseAuth.onAuthStateChanged.map(currentUser);
-  }
-
-  Future<FirebaseUser> getCurrentUser() async {
-    FirebaseUser user = await _firebaseAuth.currentUser();
-    return user;
+  Stream<FirebaseUser> get onAuthStateChanged {
+    return _firebaseAuth.onAuthStateChanged;
   }
 
   Future<void> signOut() async {
-    return await _firebaseAuth.signOut();
+    _firebaseAuth.signOut();
+  }
+
+  Future<bool> loginWithGoogle() async {
+    GoogleSignIn googleSignIn = GoogleSignIn();
+    GoogleSignInAccount account = await googleSignIn.signIn();
+    if (account != null) {
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await account.authentication;
+
+      AuthResult result = await _firebaseAuth.signInWithCredential(
+          GoogleAuthProvider.getCredential(
+              idToken: googleSignInAuthentication.idToken,
+              accessToken: googleSignInAuthentication.accessToken));
+      return result != null;
+    }
+    return false;
+  }
+
+  Future<bool> loginWithFacebook() async {
+    AuthResult authResult;
+    final facebookLogin = FacebookLogin();
+    final result = await facebookLogin.logIn(['email', 'public_profile']);
+    if (result.status == FacebookLoginStatus.loggedIn) {
+      FacebookAccessToken facebookAccessToken = result.accessToken;
+      AuthCredential authCredential = FacebookAuthProvider.getCredential(
+          accessToken: facebookAccessToken.token);
+      authResult = await _firebaseAuth.signInWithCredential(authCredential);
+    }
+    return authResult != null;
   }
 }

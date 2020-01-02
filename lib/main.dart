@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:honor_store/screens/auth_screen.dart';
-import 'package:honor_store/screens/home_screen.dart';
-import 'package:honor_store/screens/login_screen.dart';
 import 'package:honor_store/services/firebase_authentication_service.dart';
 import 'package:honor_store/services/firestore_service.dart';
 import 'package:provider/provider.dart';

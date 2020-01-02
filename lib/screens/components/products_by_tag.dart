@@ -16,6 +16,10 @@ class ProductsByTag extends StatelessWidget {
         lstWidgets.add(ProductDetail(p));
       } else if (tag == kTagAll) {
         lstWidgets.add(ProductDetail(p));
+      } else if (tag == kTagOther) {
+        if (!p.tags.contains(kTagOil) && !p.tags.contains(kTagWine)) {
+          lstWidgets.add(ProductDetail(p));
+        }
       }
     }
     return lstWidgets;
@@ -43,6 +47,12 @@ class ProductDetail extends StatelessWidget {
   final Product product;
 
   ProductDetail(this.product);
+  String formatPrice(String price) {
+    RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
+    Function mathFunc = (Match match) => '${match[1]},';
+
+    return price.replaceAllMapped(reg, mathFunc) + ' VND';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +124,7 @@ class ProductDetail extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            '${product.price}VND',
+                            formatPrice('${product.price}'),
                             style: TextStyle(fontSize: 14.0),
                           ),
                         ],

@@ -17,7 +17,7 @@ class SearchWidget extends StatelessWidget {
                 width: 1.5,
               ),
             ),
-            labelText: "Search",
+            labelText: "Tìm kiếm",
             labelStyle: TextStyle(),
             prefixIcon: Icon(
               Icons.search,

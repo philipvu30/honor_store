@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  'Password',
+                                  'Mật khẩu',
                                   style: TextStyle(fontSize: 16.0),
                                 ),
                               ],
@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 5.0,
                             ),
                             InputTextWidget(
-                              hintText: 'Password',
+                              hintText: 'Mật khẩu',
                               onTextChanged: getPassword,
                             ),
                             SizedBox(
@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    'Forgot password?',
+                                    'Quên mật khẩu?',
                                     style: TextStyle(fontSize: 12.0),
                                   ),
                                 ],
@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
                                       Text(
-                                        'LOGIN',
+                                        'ĐĂNG NHẬP',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
@@ -191,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
                                     Text(
-                                      'SIGN UP',
+                                      'ĐĂNG KÝ',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(fontSize: 14.0),
                                     ),
@@ -211,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: 5.0,
                             ),
-                            Center(child: Text('or login with')),
+                            Center(child: Text('hoặc đăng nhập với')),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -241,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    'Skip registration? Touch me!',
+                                    'Bỏ qua đăng ký? Nhấn vào đây!',
                                     style: TextStyle(
                                         color: Colors.black54, fontSize: 10.0),
                                   ),

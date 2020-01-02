@@ -129,6 +129,13 @@ class MainProductImage extends StatelessWidget {
     );
   }
 
+  String formatPrice(String price) {
+    RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
+    Function mathFunc = (Match match) => '${match[1]},';
+
+    return price.replaceAllMapped(reg, mathFunc) + ' VND';
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> list = [];
@@ -138,69 +145,104 @@ class MainProductImage extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: <Widget>[
-          Flexible(
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 16.0),
-              child: Swiper(
-                itemBuilder: (context, index) {
-                  return Image.network(
-                    product.images[index],
-                    fit: BoxFit.cover,
-                  );
-                },
-                itemCount: product.images.length,
-                viewportFraction: 0.8,
-                scale: 0.9,
-              ),
+          Container(
+            height: 200,
+            margin: EdgeInsets.symmetric(vertical: 16.0),
+            child: Swiper(
+              itemBuilder: (context, index) {
+                return Image.network(
+                  product.images[index],
+                  fit: BoxFit.cover,
+                );
+              },
+              itemCount: product.images.length,
+              viewportFraction: 0.8,
+              scale: 0.8,
             ),
           ),
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Row(
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        product.name,
-                      ),
+                    Row(
+                      textBaseline: TextBaseline.alphabetic,
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            product.name,
+                            style: TextStyle(
+                                fontFamily: 'OpenSans', fontSize: 24.0),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            formatPrice('${product.price}'),
+                            style: TextStyle(
+                                fontFamily: 'OpenSans', fontSize: 20.0),
+                            textAlign: TextAlign.end,
+                          ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: Text(
-                        '${product.price}',
-                        textAlign: TextAlign.end,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  textBaseline: TextBaseline.alphabetic,
-                  children: <Widget>[
-                    StarRating(getRating(product.stars)),
                     SizedBox(
-                      width: 10.0,
+                      height: 8.0,
+                    ),
+                    Row(
+                      textBaseline: TextBaseline.alphabetic,
+                      children: <Widget>[
+                        StarRating(getRating(product.stars)),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(
+                          getReviewsCount(product.stars),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8.0,
                     ),
                     Text(
-                      getReviewsCount(product.stars),
+                      "Size",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8.0,
+                    ),
+                    Row(children: getSizeWidgets(product.size)),
+                    SizedBox(
+                      height: 8.0,
+                    ),
+                    Text(
+                      "Số lượng",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8.0,
+                    ),
+                    AmountWidget(),
+                    SizedBox(
+                      height: 8.0,
+                    ),
+                    DescriptionWidget(product.description),
+                    Container(
+                      child: getOtherProducts(),
                     ),
                   ],
                 ),
-                Text(
-                  "Size",
-                  textAlign: TextAlign.start,
-                ),
-                Row(children: getSizeWidgets(product.size)),
-                Text(
-                  "Số lượng",
-                  textAlign: TextAlign.start,
-                ),
-                AmountWidget(),
-                DescriptionWidget(product.description),
-                Container(
-                  child: getOtherProducts(),
-                ),
-              ],
+              ),
             ),
           ),
         ],
@@ -250,6 +292,10 @@ class DescriptionWidget extends StatelessWidget {
           Text(
             "Công dụng",
             textAlign: TextAlign.start,
+            style: TextStyle(
+              fontSize: 16.0,
+              fontFamily: 'OpenSans',
+            ),
           ),
           Expandable(
             collapsed: ExpandableButton(
@@ -285,11 +331,12 @@ class AmountWidget extends StatefulWidget {
 }
 
 class _AmountWidgetState extends State<AmountWidget> {
+  int counter = 0;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 105.0,
-      height: 35.0,
+      height: 30.0,
       child: Material(
         borderRadius: BorderRadius.circular(20.0),
         elevation: 5.0,
@@ -300,15 +347,28 @@ class _AmountWidgetState extends State<AmountWidget> {
             IconButton(
               icon: Icon(Icons.add),
               iconSize: 16.0,
-              onPressed: () {},
+              color: Colors.white,
+              onPressed: () {
+                setState(() {
+                  counter++;
+                });
+              },
             ),
             Text(
-              "0",
+              "$counter",
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
             IconButton(
               icon: Icon(Icons.remove),
               iconSize: 16.0,
-              onPressed: () {},
+              color: Colors.white,
+              onPressed: () {
+                setState(() {
+                  counter != 0 ? counter-- : counter = counter;
+                });
+              },
             ),
           ],
         ),
@@ -329,7 +389,8 @@ class SizeWidget extends StatefulWidget {
 class _SizeWidgetState extends State<SizeWidget> {
   @override
   Widget build(BuildContext context) {
-    return Flexible(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: Material(
         borderRadius: BorderRadius.circular(20.0),
         elevation: 5.0,
@@ -337,9 +398,13 @@ class _SizeWidgetState extends State<SizeWidget> {
         child: GestureDetector(
           onTap: () {},
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
             child: Text(
               widget.sizeText,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

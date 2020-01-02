@@ -88,7 +88,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  'Name',
+                                  'Tên',
                                   style: TextStyle(
                                     fontSize: 16.0,
                                   ),
@@ -99,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               height: 5.0,
                             ),
                             InputTextWidget(
-                              hintText: 'Name',
+                              hintText: 'Tên',
                               onTextChanged: getName,
                             ),
                             SizedBox(
@@ -128,7 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  'Password',
+                                  'Mật khẩu',
                                   style: TextStyle(fontSize: 16.0),
                                 ),
                               ],
@@ -137,7 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               height: 5.0,
                             ),
                             InputTextWidget(
-                              hintText: 'Password',
+                              hintText: 'Mật khẩu',
                               onTextChanged: getPassword,
                             ),
                             SizedBox(
@@ -164,7 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
                                       Text(
-                                        'SIGN UP',
+                                        'ĐĂNG KÝ',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
@@ -186,7 +186,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    'Already member? Back to login!',
+                                    'Đã là thành viên? Quay trở lại màn hình đăng nhập!',
                                     style: TextStyle(
                                         color: Colors.black54, fontSize: 10.0),
                                   ),

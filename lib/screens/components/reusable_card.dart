@@ -4,7 +4,7 @@ import 'package:honor_store/model/promotion.dart';
 import 'package:honor_store/screens/constants.dart';
 import 'package:honor_store/screens/home_screen.dart';
 import 'package:honor_store/screens/product_detail_screen.dart';
-import 'package:honor_store/screens/promotion_detail_scren.dart';
+import 'package:honor_store/screens/promotion_detail_screen.dart';
 import 'package:honor_store/screens/promotion_screen.dart';
 import 'package:honor_store/screens/service_screen.dart';
 import 'package:honor_store/services/firebase_storage_service.dart';

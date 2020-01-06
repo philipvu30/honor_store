@@ -297,6 +297,9 @@ class DescriptionWidget extends StatelessWidget {
               fontFamily: 'OpenSans',
             ),
           ),
+          SizedBox(
+            height: 8.0,
+          ),
           Expandable(
             collapsed: ExpandableButton(
               child: Text(

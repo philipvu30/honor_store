@@ -33,6 +33,8 @@ class _HomeScreenAvatarState extends State<HomeScreenAvatar> {
               GestureDetector(
                 onTap: () {},
                 child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/graphics/logo.png'),
+                  backgroundColor: Colors.transparent,
                   radius: 20.0,
                 ),
               ),

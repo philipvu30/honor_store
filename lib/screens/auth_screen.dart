@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honor_store/screens/home_screen.dart';
 import 'package:honor_store/screens/login_screen.dart';
+import 'package:honor_store/screens/main_screen.dart';
 import 'package:honor_store/services/firebase_authentication_service.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class _AuthWidgetState extends State<AuthWidget> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            return HomeScreen();
+            return MainScreen();
           }
           return LoginScreen();
         }
